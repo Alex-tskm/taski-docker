@@ -11,9 +11,21 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['swiftrainbow438.ddns.net', '84.201.129.34', 'localhost', '127.0.0.1']
 # CSRF_TRUSTED_ORIGINS = ['https://84.201.129.34', 'https://swiftrainbow438.ddns.net']
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+ALLOWED_HOSTS = [
+    host for host in os.getenv(
+        'ALLOWED_HOSTS',
+        'swiftrainbow438.ddns.net,84.201.129.34,localhost,127.0.0.1'
+    ).split(',')
+    if host
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    origin for origin in os.getenv(
+        'CSRF_TRUSTED_ORIGINS',
+        'https://84.201.129.34,https://swiftrainbow438.ddns.net'
+    ).split(',')
+    if origin
+]
 
 # Application definition
 
